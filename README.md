@@ -1,6 +1,6 @@
 # AI Agentic Design Patterns - Educational Examples
 
-Examples of 5 agentic patterns using **LangGraph**, **CrewAI**, and **n8n**.
+Examples of 5 agentic patterns using **LangGraph**, **CrewAI**.
 
 ## Setup
 
@@ -50,12 +50,6 @@ cp .env.example .env
 - Build **teams of agents** that collaborate
 - Great for: multi-agent systems, role-based tasks
 - Key concepts: `Agent`, `Task`, `Crew`, memory
-
-### n8n
-- **Visual** workflow builder (no code)
-- Great for: quick prototypes, integrations, demos
-- Key concepts: nodes, connections, triggers
-
 ## Run Examples
 
 ```bash
@@ -86,12 +80,3 @@ python crewai_02_memory.py
 ├── crewai_01_multiagent.py    # Multi-Agent Pattern
 └── crewai_02_memory.py        # Memory Pattern
 ```
-
-## Presentation Flow (10 min)
-
-1. **Theory** (3 min): Explain 5 patterns briefly
-2. **Frameworks** (2 min): LangGraph, CrewAI, n8n overview
-3. **Demos** (5 min):
-   - n8n: Reflection pattern (visual)
-   - LangGraph: Tool usage OR planning
-   - CrewAI: Multi-agent
