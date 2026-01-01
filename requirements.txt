@@ -1,0 +1,11 @@
+# Core
+python-dotenv>=1.0.0
+google-generativeai>=0.8.0
+
+# LangGraph (for Tool Usage + Planning patterns)
+langgraph>=0.2.0
+langchain-google-genai>=2.0.0
+langchain-core>=0.3.0
+
+# CrewAI (for Multi-Agent + Memory patterns)
+crewai>=0.80.0
