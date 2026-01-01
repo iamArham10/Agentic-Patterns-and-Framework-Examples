@@ -1,7 +1,6 @@
 """
 CREWAI - MEMORY PATTERN
 
-Memory allows agents to remember past interactions and learn.
 CrewAI supports different types of memory:
 - Short-term: Current conversation context
 - Long-term: Persisted across sessions
@@ -14,18 +13,14 @@ from crewai import Agent, Task, Crew, LLM
 
 load_dotenv()
 
-# ============================================================
 # STEP 1: Configure LLM
-# ============================================================
 
 llm = LLM(
     model="gemini/gemini-2.5-flash-lite",
     api_key=os.getenv("GOOGLE_API_KEY")
 )
 
-# ============================================================
 # STEP 2: Create Agent WITH Memory Enabled
-# ============================================================
 
 assistant = Agent(
     role="Personal Assistant",
@@ -38,9 +33,7 @@ assistant = Agent(
     verbose=True
 )
 
-# ============================================================
 # STEP 3: Create Crew WITH Memory Enabled
-# ============================================================
 
 def create_memory_crew():
     """Create a crew with memory capabilities."""
@@ -51,9 +44,7 @@ def create_memory_crew():
         verbose=True
     )
 
-# ============================================================
 # STEP 4: Simulate Conversation with Memory
-# ============================================================
 
 def chat_with_memory():
     """Demonstrate memory across multiple interactions."""
@@ -68,7 +59,6 @@ across multiple interactions.
     
     crew = create_memory_crew()
     
-    # Conversation 1: Tell the agent something
     print("\n--- INTERACTION 1 ---")
     task1 = Task(
         description="The user says: 'My name is Alex and I love Python programming.'",
@@ -79,7 +69,6 @@ across multiple interactions.
     result1 = crew.kickoff()
     print(f"Response: {result1}\n")
     
-    # Conversation 2: Ask something that requires memory
     print("\n--- INTERACTION 2 ---")
     task2 = Task(
         description="The user asks: 'What programming language do I like?'",
@@ -90,7 +79,6 @@ across multiple interactions.
     result2 = crew.kickoff()
     print(f"Response: {result2}\n")
     
-    # Conversation 3: Add more info and test recall
     print("\n--- INTERACTION 3 ---")
     task3 = Task(
         description="The user says: 'I also enjoy machine learning projects.'",
@@ -101,7 +89,6 @@ across multiple interactions.
     result3 = crew.kickoff()
     print(f"Response: {result3}\n")
     
-    # Conversation 4: Test combined memory
     print("\n--- INTERACTION 4 ---")
     task4 = Task(
         description="The user asks: 'Based on what you know about me, suggest a project I might enjoy.'",
@@ -124,9 +111,7 @@ The agent remembered:
 This memory persists across interactions!
     """)
 
-# ============================================================
 # RUN
-# ============================================================
 
 if __name__ == "__main__":
     chat_with_memory()

@@ -2,10 +2,6 @@
 LANGGRAPH - REFLECTION PATTERN
 
 The agent generates content, critiques it, and improves iteratively.
-- Generate initial response
-- Critique and find issues
-- Improve based on feedback
-- Repeat until satisfied
 """
 
 import os
@@ -18,30 +14,24 @@ load_dotenv()
 
 llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash-lite", temperature=0.5)
 
-# ============================================================
 # STEP 1: Define State
-# ============================================================
 
 class ReflectionState(TypedDict):
     task: str                # What to write
-    draft: str               # Current draft
+    draft: str                # Current draft
     critique: str            # Feedback on draft
-    iteration: int           # Current iteration (0, 1, 2...)
+    iteration: int          # Current iteration
     max_iterations: int      # When to stop
 
-# ============================================================
 # STEP 2: Define Nodes
-# ============================================================
 
 def generate(state: ReflectionState) -> ReflectionState:
     """Node 1: Generate or improve content."""
     print(f"\n[NODE: generate] Iteration {state['iteration']}")
     
     if state["iteration"] == 0:
-        # First time: generate from scratch
         prompt = f"Write a response for: {state['task']}\nBe concise (2-3 sentences)."
     else:
-        # Subsequent times: improve based on critique
         prompt = f"""Improve this draft based on the feedback.
 
 Task: {state['task']}
@@ -81,9 +71,7 @@ Provide brief, actionable feedback:"""
     
     return {**state, "critique": critique, "iteration": state["iteration"] + 1}
 
-# ============================================================
 # STEP 3: Define Routing
-# ============================================================
 
 def should_continue(state: ReflectionState) -> str:
     """Decide: improve more or finish?"""
@@ -91,9 +79,7 @@ def should_continue(state: ReflectionState) -> str:
         return "improve"    # Go back to generate
     return "finish"         # Done iterating
 
-# ============================================================
 # STEP 4: Build the Graph
-# ============================================================
 
 def build_reflection_agent():
     """Build the reflection agent."""
@@ -113,9 +99,6 @@ def build_reflection_agent():
     
     return graph.compile()
 
-# ============================================================
-# RUN
-# ============================================================
 
 if __name__ == "__main__":
     print("=" * 50)

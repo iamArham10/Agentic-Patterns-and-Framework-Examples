@@ -133,16 +133,14 @@ if __name__ == "__main__":
     
     agent = build_agent()
     
-    # Test with a math question
-    print("\nQuery: What is 15 * 7?")
+    print("\nQuery: What is 14 * 7?")
     result = agent.invoke({
-        "messages": [HumanMessage(content="What is 15 * 7?")],
+        "messages": [HumanMessage(content="What is 14 * 7?")],
         "tool_result": ""
     })
     
     print("\n" + "-" * 50)
     
-    # Test with weather question
     print("\nQuery: What's the weather in Lahore?")
     result = agent.invoke({
         "messages": [HumanMessage(content="What's the weather in Lahore?")],

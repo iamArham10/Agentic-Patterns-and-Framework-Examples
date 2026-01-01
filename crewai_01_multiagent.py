@@ -12,18 +12,12 @@ from crewai import Agent, Task, Crew, LLM
 
 load_dotenv()
 
-# ============================================================
-# STEP 1: Configure LLM (using Gemini - free tier)
-# ============================================================
 
 llm = LLM(
     model="gemini/gemini-2.5-flash-lite",
     api_key=os.getenv("GOOGLE_API_KEY")
 )
 
-# ============================================================
-# STEP 2: Define Agents (each with a specialized role)
-# ============================================================
 
 researcher = Agent(
     role="Researcher",
@@ -49,9 +43,6 @@ editor = Agent(
     verbose=True
 )
 
-# ============================================================
-# STEP 3: Define Tasks (work for each agent)
-# ============================================================
 
 def create_tasks(topic: str):
     """Create tasks for the crew."""
@@ -76,9 +67,6 @@ def create_tasks(topic: str):
     
     return [research_task, writing_task, editing_task]
 
-# ============================================================
-# STEP 4: Create Crew (team of agents)
-# ============================================================
 
 def run_crew(topic: str):
     """Run the multi-agent crew on a topic."""
@@ -103,9 +91,7 @@ def run_crew(topic: str):
     
     return result
 
-# ============================================================
 # RUN
-# ============================================================
 
 if __name__ == "__main__":
     print("=" * 50)

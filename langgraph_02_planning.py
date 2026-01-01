@@ -15,9 +15,7 @@ load_dotenv()
 
 llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash-lite", temperature=0.3)
 
-# ============================================================
 # STEP 1: Define State
-# ============================================================
 
 class PlanState(TypedDict):
     task: str                # Original task
@@ -26,9 +24,7 @@ class PlanState(TypedDict):
     results: list           # Results from each step
     final_answer: str       # Final combined answer
 
-# ============================================================
 # STEP 2: Define Nodes
-# ============================================================
 
 def create_plan(state: PlanState) -> PlanState:
     """Node 1: Break task into steps."""
@@ -96,9 +92,7 @@ Provide a brief final summary:"""
     
     return {**state, "final_answer": response.content}
 
-# ============================================================
 # STEP 3: Define Routing
-# ============================================================
 
 def should_continue(state: PlanState) -> str:
     """Check if more steps to execute."""
@@ -106,9 +100,7 @@ def should_continue(state: PlanState) -> str:
         return "continue"      # More steps to do
     return "summarize"         # All steps done
 
-# ============================================================
 # STEP 4: Build the Graph
-# ============================================================
 
 def build_planner():
     """Build the planning agent."""
@@ -129,10 +121,6 @@ def build_planner():
     graph.add_edge("summarize", END)
     
     return graph.compile()
-
-# ============================================================
-# RUN
-# ============================================================
 
 if __name__ == "__main__":
     print("=" * 50)
